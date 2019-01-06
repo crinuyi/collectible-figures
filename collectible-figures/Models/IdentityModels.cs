@@ -29,5 +29,11 @@ namespace collectible_figures.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<collectible_figures.Models.Classification> Classifications { get; set; }
+
+        public System.Data.Entity.DbSet<collectible_figures.Models.Series> Series { get; set; }
+
+        public System.Data.Entity.DbSet<collectible_figures.Models.Figure> Figures { get; set; }
     }
 }
