@@ -15,12 +15,14 @@ namespace collectible_figures.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Classifications
+        [Route("typ")]
         public ActionResult Index()
         {
             return View(db.Classifications.ToList());
         }
 
         // GET: Classifications/Details/5
+        [Route("typ/{id:int}")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace collectible_figures.Controllers
         }
 
         // GET: Classifications/Create
+        [Route("typ/dodaj")]
         public ActionResult Create()
         {
             return View();
@@ -59,6 +62,7 @@ namespace collectible_figures.Controllers
         }
 
         // GET: Classifications/Edit/5
+        [Route("typ/edytuj/{id:int}")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,6 +94,7 @@ namespace collectible_figures.Controllers
         }
 
         // GET: Classifications/Delete/5
+        [Route("typ/usun/{id:int}")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

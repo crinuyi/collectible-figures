@@ -15,6 +15,7 @@ namespace collectible_figures.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Figures
+        [Route("figurka")]
         public ActionResult Index()
         {
             var figures = db.Figures.Include(f => f.Classification).Include(f => f.Series);
@@ -22,6 +23,7 @@ namespace collectible_figures.Controllers
         }
 
         // GET: Figures/Details/5
+        [Route("figurka/{id:int}")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace collectible_figures.Controllers
         }
 
         // GET: Figures/Create
+        [Route("figurka/dodaj")]
         public ActionResult Create()
         {
             ViewBag.ClassificationID = new SelectList(db.Classifications, "ClassificationID", "Name");
@@ -64,6 +67,7 @@ namespace collectible_figures.Controllers
         }
 
         // GET: Figures/Edit/5
+        [Route("figurka/edytuj/{id:int}")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -99,6 +103,7 @@ namespace collectible_figures.Controllers
         }
 
         // GET: Figures/Delete/5
+        [Route("figurka/usun/{id:int}")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

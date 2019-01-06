@@ -10,6 +10,8 @@ namespace collectible_figures {
         public static void RegisterRoutes(RouteCollection routes) {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapMvcAttributeRoutes(); //for attrtibute routing!
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
