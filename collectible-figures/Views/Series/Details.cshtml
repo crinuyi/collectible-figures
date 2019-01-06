@@ -1,13 +1,12 @@
 ﻿@model collectible_figures.Models.Series
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Szczegóły serii";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły serii</h2>
 
 <div>
-    <h4>Series</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -21,6 +20,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.SeriesID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.SeriesID }) |
+    @Html.ActionLink("Powrót do listy serii", "Index")
 </p>

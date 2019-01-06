@@ -1,13 +1,12 @@
 ﻿@model collectible_figures.Models.Classification
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Szczegóły typu";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły typu</h2>
 
 <div>
-    <h4>Classification</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -22,5 +21,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ClassificationID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Powrót do listy typów figurek", "Index")
 </p>

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<collectible_figures.Models.Classification>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista typów figurek";
 }
 
-<h2>Index</h2>
+<h2>Lista typów figurek</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj nowy typ", "Create")
 </p>
 <table class="table">
     <tr>
@@ -23,9 +23,9 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ClassificationID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ClassificationID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ClassificationID })
+            @Html.ActionLink("Edytuj", "Edit", new { id=item.ClassificationID }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id=item.ClassificationID }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.ClassificationID })
         </td>
     </tr>
 }
