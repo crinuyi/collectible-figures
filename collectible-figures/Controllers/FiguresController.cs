@@ -40,6 +40,7 @@ namespace collectible_figures.Controllers
 
         // GET: Figures/Create
         [Route("figurka/dodaj")]
+        [Authorize(Roles = "Admin, Moderator")]
         public ActionResult Create()
         {
             ViewBag.ClassificationID = new SelectList(db.Classifications, "ClassificationID", "Name");
@@ -68,6 +69,7 @@ namespace collectible_figures.Controllers
 
         // GET: Figures/Edit/5
         [Route("figurka/edytuj/{id:int}")]
+        [Authorize(Roles = "Admin, Moderator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -104,6 +106,7 @@ namespace collectible_figures.Controllers
 
         // GET: Figures/Delete/5
         [Route("figurka/usun/{id:int}")]
+        [Authorize(Roles = "Admin, Moderator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

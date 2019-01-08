@@ -39,6 +39,7 @@ namespace collectible_figures.Controllers
 
         // GET: Series/Create
         [Route("seria/dodaj")]
+        [Authorize(Roles = "Admin, Moderator")]
         public ActionResult Create()
         {
             return View();
@@ -63,6 +64,7 @@ namespace collectible_figures.Controllers
 
         // GET: Series/Edit/5
         [Route("seria/edytuj/{id:int}")]
+        [Authorize(Roles = "Admin, Moderator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -95,6 +97,7 @@ namespace collectible_figures.Controllers
 
         // GET: Series/Delete/5
         [Route("seria/usun/{id:int}")]
+        [Authorize(Roles = "Admin, Moderator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
