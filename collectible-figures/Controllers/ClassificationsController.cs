@@ -38,7 +38,6 @@ namespace collectible_figures.Controllers
         }
 
         // GET: Classifications/Create
-        [Route("typ/dodaj")]
         [Authorize(Roles = "Admin, Moderator")]
         public ActionResult Create()
         {
@@ -63,7 +62,6 @@ namespace collectible_figures.Controllers
         }
 
         // GET: Classifications/Edit/5
-        [Route("typ/edytuj/{id:int}")]
         [Authorize(Roles = "Admin, Moderator")]
         public ActionResult Edit(int? id)
         {
@@ -96,7 +94,6 @@ namespace collectible_figures.Controllers
         }
 
         // GET: Classifications/Delete/5
-        [Route("typ/usun/{id:int}")]
         [Authorize(Roles = "Admin, Moderator")]
         public ActionResult Delete(int? id)
         {
