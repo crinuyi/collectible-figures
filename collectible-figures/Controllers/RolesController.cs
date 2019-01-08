@@ -13,22 +13,6 @@ namespace collectible_figures.Controllers
     {
         ApplicationDbContext context = new ApplicationDbContext();
 
-        public Boolean isAdminUser() {
-            if (User.Identity.IsAuthenticated) {
-                var user = User.Identity;
-                ApplicationDbContext context = new ApplicationDbContext();
-                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-                var s = UserManager.GetRoles(user.GetUserId());
-                if (s[0].ToString() == "Admin") {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            }
-            return false;
-        }
-
         //_____________________________________________________________
         // GET: Roles
         public ActionResult Index() {
@@ -39,19 +23,6 @@ namespace collectible_figures.Controllers
                 else return RedirectToAction("Index", "Home");
             }
             else return RedirectToAction("Index", "Home");
-
-            /*if (User.Identity.IsAuthenticated) {
-                if (!isAdminUser()) {
-                    return RedirectToAction("Index", "Home");
-                }
-                else {
-                    var Roles = context.Roles.ToList();
-                    return View(Roles);
-                }
-            }
-            else {
-                return RedirectToAction("Index", "Home");
-            }*/
         }
     }
 }
