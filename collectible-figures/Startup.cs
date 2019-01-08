@@ -50,10 +50,17 @@ namespace collectible_figures
 
             // Creating Moderator role    
             if (!roleManager.RoleExists("Moderator")) {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                var role = new IdentityRole();
                 role.Name = "Moderator";
                 roleManager.Create(role);
 
+            }
+
+            //Creating Uzytkownik role
+            if(!roleManager.RoleExists("Użytkownik")) {
+                var role = new IdentityRole();
+                role.Name = "Użytkownik";
+                roleManager.Create(role);
             }
         }
     }
