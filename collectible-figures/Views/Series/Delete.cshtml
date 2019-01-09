@@ -4,28 +4,34 @@
     ViewBag.Title = "Usuń serię";
 }
 
-<h2>Usuń serię</h2>
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h3 class="panel-title">Usuń serię</h3>
+    </div>
+    <div class="panel-body">
+        @*panel content*@
+        <h3 class="text-warning">Czy jesteś pewien, że chcesz to usunąć?</h3>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <span class="label label-warning">@Html.DisplayNameFor(model => model.Name)</span>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+            </dl>
 
-<h3>Czy jesteś pewien, że chcesz to usunąć?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+            @using (Html.BeginForm()) {
+                @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Powrót do listy serii", "Index")
+                <div class="form-actions no-color">
+                    <input type="submit" value="Usuń" class="btn btn-warning" />
+                    <button type="button"
+                            class="btn btn-default"
+                            onclick="location.href='@Url.Action("Index", "Series")'">
+                        Powrót do listy serii
+                    </button>
+                </div>
+            }
         </div>
-    }
+    </div>
 </div>

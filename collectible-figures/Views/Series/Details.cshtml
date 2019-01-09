@@ -4,22 +4,24 @@
     ViewBag.Title = "Szczegóły serii";
 }
 
-<h2>Szczegóły serii</h2>
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h3 class="panel-title">Szczegóły serii</h3>
+    </div>
+    <div class="panel-body">
+        @*panel content*@
+        <dl class="dl-horizontal">
+            <span class="label label-warning">@Html.DisplayNameFor(model => model.Name)</span>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+        </dl>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-    </dl>
+        <hr />
+        <button type="button"
+                class="btn btn-default"
+                onclick="location.href='@Url.Action("Index", "Series")'">
+            Powrót do listy serii
+        </button>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edytuj", "Edit", new { id = Model.SeriesID }) |
-    @Html.ActionLink("Powrót do listy serii", "Index")
-</p>
