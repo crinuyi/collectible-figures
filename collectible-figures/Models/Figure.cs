@@ -35,15 +35,15 @@ namespace collectible_figures.Models {
         public decimal Price { get; set; }
 
         [ForeignKey("Classification")]
-        public int ClassificationID { get; set; }
-
         [DisplayName("Typ")]
+        public int ClassificationID { get; set; }
+        
         public virtual Classification Classification { get; set; }
 
         [ForeignKey("Series")]
-        public int SeriesID { get; set; }
-
         [DisplayName("Seria")]
+        public int SeriesID { get; set; }
+        
         public virtual Series Series { get; set; }     
     }
 }
