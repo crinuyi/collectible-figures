@@ -14,21 +14,23 @@ namespace collectible_figures.Models {
 
         [DataType(DataType.Text)]
         [Required]
+        [StringLength(1000)]
         [DisplayName("Nazwa figurki")]
         public string Name { get; set; }
 
         [DataType(DataType.Text)]
-        [RegularExpression("^1:[0-9]*$", ErrorMessage = "Scale must contain 1:[number].")]
+        [RegularExpression("^1:[0-9]*$", ErrorMessage = "Skala musi zostać przedstawiona jako 1:[liczba].")]
         [DisplayName("Skala")]
         public string Scale { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayName("Data wydania")]
+        [Required]
         public DateTime ReleaseDate { get; set; }
 
         [DataType(DataType.Currency)]
         [Required]
-        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         [DisplayName("Cena")]
         public decimal Price { get; set; }
 

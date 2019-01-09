@@ -12,7 +12,11 @@ namespace collectible_figures.Controllers
 {
     public class ClassificationsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db = new ApplicationDbContext();       
+
+        public JsonResult DoesNameExists(string name) {
+            return Json(!db.Classifications.Any(x => x.Name == name), JsonRequestBehavior.AllowGet);
+        }
 
         // GET: Classifications
         [Route("typ")]
