@@ -3,31 +3,51 @@
 @{
     ViewBag.Title = "Lista typów figurek";
 }
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Lista typów figurek</h3>
+    </div>
+    <div class="panel-body">
+        @*panel content*@
+        @if (User.Identity.IsAuthenticated) {
+            <p>
+                <div>
+                    <button type="button"
+                            class="btn btn-default"
+                            onclick="location.href='@Url.Action("Create", "Classifications")'">
+                        Dodaj nowy typ
+                    </button>
+                </div>
+            </p>
+        }
 
-<h2>Lista typów figurek</h2>
-
-<p>
-    @Html.ActionLink("Dodaj nowy typ", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edytuj", "Edit", new { id=item.ClassificationID }) |
-            @Html.ActionLink("Szczegóły", "Details", new { id=item.ClassificationID }) |
-            @Html.ActionLink("Usuń", "Delete", new { id=item.ClassificationID })
-        </td>
-    </tr>
-}
-
-</table>
+        <table class="table">
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @if (Request.IsAuthenticated) {
+                            <button type="button"
+                                    class="btn btn-warning btn-primary btn-xs"
+                                    onclick="location.href='@Url.Action("Edit", "Classifications", new { @id = item.ClassificationID })'">
+                                Edytuj
+                            </button>
+                            <button type="button"
+                                    class="btn btn-danger btn-primary btn-xs"
+                                    onclick="location.href='@Url.Action("Delete", "Classifications", new { @id = item.ClassificationID })'">
+                                Usuń
+                            </button>
+                        }
+                        <button type="button"
+                                class="btn btn-info btn-primary btn-xs"
+                                onclick="location.href='@Url.Action("Details", "Classifications", new { @id = item.ClassificationID })'">
+                            Szczegóły
+                        </button>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

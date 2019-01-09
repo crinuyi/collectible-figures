@@ -4,34 +4,38 @@
     ViewBag.Title = "Dodaj typ";
 }
 
-<h2>Dodaj typ</h2>
-
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Dodaj" class="btn btn-default" />
-            </div>
-        </div>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Dodaj typ</h3>
     </div>
-}
+    <div class="panel-body">
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
 
-<div>
-    @Html.ActionLink("Powrót do listy typów figurek", "Index")
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label label-info col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Dodaj" class="btn btn-info" />
+                        <button type="button"
+                                class="btn btn-default"
+                                onclick="location.href='@Url.Action("Index", "Classifications")'">
+                            Powrót do listy typów figurek
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
 
 @section Scripts {

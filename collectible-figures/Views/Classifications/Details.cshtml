@@ -4,22 +4,24 @@
     ViewBag.Title = "Szczegóły typu";
 }
 
-<h2>Szczegóły typu</h2>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Szczegóły typu</h3>
+    </div>
+    <div class="panel-body">
+        @*panel content*@
+        <dl class="dl-horizontal">
+            <span class="label label-info">@Html.DisplayNameFor(model => model.Name)</span>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+        </dl>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-    </dl>
+        <hr />
+        <button type="button"
+                class="btn btn-default"
+                onclick="location.href='@Url.Action("Index", "Classifications")'">
+            Powrót do listy typów figurek
+        </button>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ClassificationID }) |
-    @Html.ActionLink("Powrót do listy typów figurek", "Index")
-</p>

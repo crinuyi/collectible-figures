@@ -4,28 +4,36 @@
     ViewBag.Title = "Usuń typ";
 }
 
-<h2>Usuń typ</h2>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Usuń typ</h3>
+    </div>
+    <div class="panel-body">
+        @*panel content*@
+        <h3 class="text-info">Czy jesteś pewien, że chcesz to usunąć?</h3>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <span class="label label-info">@Html.DisplayNameFor(model => model.Name)</span>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+            </dl>
 
-<h3>Czy jesteś pewien, że chcesz to usunąć?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+            @using (Html.BeginForm()) {
+                @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Usuń" class="btn btn-default" /> |
-            @Html.ActionLink("Powrót do listy typów figurek", "Index")
+            <div class="form-actions no-color">
+                <input type="submit" value="Usuń" class="btn btn-info" />
+                <button type="button"
+                        class="btn btn-default"
+                        onclick="location.href='@Url.Action("Index", "Classifications")'">
+                    Powrót do listy typów figurek
+                </button>
+            </div>
+            }
         </div>
-    }
+    </div>
 </div>
+
+
