@@ -7,8 +7,13 @@
 <div class="row">
     <div class="col-md-9">
         <div class="jumbotron">
-            <h1>yey figurki!</h1>
-            <p class="lead">bla bla costam</p>
+            <h1>Figurki kolekcjonerskie</h1>
+            <p class="lead">Witamy na naszej stronie.
+                @if(!Request.IsAuthenticated) {
+                    @: Zapraszamy do utworzenia konta.
+                }
+            </p>
+            <hr />
             <button type="button"
                     class="btn btn-default"
                     onclick="location.href='@Url.Action("Index", "Statistics")'">
