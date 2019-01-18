@@ -4,6 +4,7 @@
     ViewBag.Title = "Szczegóły serii";
 }
 
+
 <div class="panel panel-warning">
     <div class="panel-heading">
         <h3 class="panel-title">Szczegóły serii</h3>
@@ -14,6 +15,10 @@
             <span class="label label-warning">@Html.DisplayNameFor(model => model.Name)</span>
             <dd>
                 @Html.DisplayFor(model => model.Name)
+            </dd>
+            <span class="label label-warning">Ilość figurek z podanej serii</span>
+            <dd>
+                @ViewBag.Total
             </dd>
         </dl>
 

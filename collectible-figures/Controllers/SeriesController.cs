@@ -34,6 +34,8 @@ namespace collectible_figures.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Total = db.Figures.Count(x => x.SeriesID == id);
             return View(series);
         }
 
