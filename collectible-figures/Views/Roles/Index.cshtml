@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+@{
+    ViewBag.Title = "Lista ról";
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Lista ról</h3>
+    </div>
+    <div class="panel-body">
+        @*panel content*@
+        <table class="table">
+            @foreach (var item in Model) {
+                <tr>
+                    @Html.DisplayFor(modelItem => item.Name)
+                    <br /><br />
+                </tr>
+            }
+        </table>
+    </div>
+</div>

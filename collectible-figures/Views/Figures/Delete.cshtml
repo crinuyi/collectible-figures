@@ -1,0 +1,67 @@
+﻿@model collectible_figures.Models.Figure
+
+@{
+    ViewBag.Title = "Usuń figurkę";
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Usuń figurkę</h3>
+    </div>
+    <div class="panel-body">
+        @*panel content*@
+        <h3 class="text-success">Czy jesteś pewien, że chcesz to usunąć?</h3>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <span class="label label-success">@Html.DisplayNameFor(model => model.Classification.Name)</span>
+                <dd>
+                    @Html.DisplayFor(model => model.Classification.Name)
+                </dd>
+                <br />
+
+                <span class="label label-success">@Html.DisplayNameFor(model => model.Series.Name)</span>
+                <dd>
+                    @Html.DisplayFor(model => model.Series.Name)
+                </dd>
+                <br />
+
+                <span class="label label-success">@Html.DisplayNameFor(model => model.Name)</span>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <br />
+
+                <span class="label label-success">@Html.DisplayNameFor(model => model.Scale)</span>
+                <dd>
+                    @Html.DisplayFor(model => model.Scale)
+                </dd>
+                <br />
+
+                <span class="label label-success">@Html.DisplayNameFor(model => model.ReleaseDate)</span>
+                <dd>
+                    @Html.DisplayFor(model => model.ReleaseDate)
+                </dd>
+                <br />
+
+                <span class="label label-success">@Html.DisplayNameFor(model => model.Price)</span>
+                <dd>
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+            </dl>
+
+            @using (Html.BeginForm()) {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Usuń" class="btn btn-success" />
+                    <button type="button"
+                            class="btn btn-default"
+                            onclick="location.href='@Url.Action("Index", "Figures")'">
+                        Powrót do listy figurek
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

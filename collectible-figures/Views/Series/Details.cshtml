@@ -1,0 +1,32 @@
+﻿@model collectible_figures.Models.Series
+
+@{
+    ViewBag.Title = "Szczegóły serii";
+}
+
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h3 class="panel-title">Szczegóły serii</h3>
+    </div>
+    <div class="panel-body">
+        @*panel content*@
+        <dl class="dl-horizontal">
+            <span class="label label-warning">@Html.DisplayNameFor(model => model.Name)</span>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <span class="label label-warning">Ilość figurek z podanej serii</span>
+            <dd>
+                @ViewBag.Total
+            </dd>
+        </dl>
+
+        <hr />
+        <button type="button"
+                class="btn btn-default"
+                onclick="location.href='@Url.Action("Index", "Series")'">
+            Powrót do listy serii
+        </button>
+    </div>
+</div>

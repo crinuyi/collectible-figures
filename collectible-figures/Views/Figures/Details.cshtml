@@ -1,0 +1,57 @@
+﻿@model collectible_figures.Models.Figure
+
+@{
+    ViewBag.Title = "Szczegóły figurki";
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Szczegóły figurki</h3>
+    </div>
+    <div class="panel-body">
+        @*panel content*@
+        <dl class="dl-horizontal">
+            <span class="label label-success">@Html.DisplayNameFor(model => model.Classification.Name)</span>
+            <dd>
+                @Html.DisplayFor(model => model.Classification.Name)
+            </dd>
+            <br />
+
+            <span class="label label-success">@Html.DisplayNameFor(model => model.Series.Name)</span>
+            <dd>
+                @Html.DisplayFor(model => model.Series.Name)
+            </dd>
+            <br />
+
+            <span class="label label-success">@Html.DisplayNameFor(model => model.Name)</span>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <br />
+
+            <span class="label label-success">@Html.DisplayNameFor(model => model.Scale)</span>
+            <dd>
+                @Html.DisplayFor(model => model.Scale)
+            </dd>
+            <br />
+
+            <span class="label label-success">@Html.DisplayNameFor(model => model.ReleaseDate)</span>
+            <dd>
+                @Html.DisplayFor(model => model.ReleaseDate)
+            </dd>
+            <br />
+
+            <span class="label label-success">@Html.DisplayNameFor(model => model.Price)</span>
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+        </dl>
+
+        <hr />
+        <button type="button"
+                class="btn btn-default"
+                onclick="location.href='@Url.Action("Index", "Figures")'">
+            Powrót do listy figurek
+        </button>
+    </div>
+</div>
