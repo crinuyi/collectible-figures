@@ -1,38 +1,71 @@
-﻿using collectible_figures.Models;
+﻿using collectible_figures.Controllers;
+using collectible_figures.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.ComponentModel.DataAnnotations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace collectible_figures.tests.Models {
     [TestClass]
     public class ClassificationTests {
         private Classification classification;
+        private ClassificationsController classificationsController;
 
         [TestInitialize]
         public void Init() {
             classification = new Classification() {
-                Name = "Sample classification",
-                Figures = {
-                    new Figure() {
-                        Name = "Sakura Kinomoto",
-                        Scale = "1:30",
-                        ReleaseDate = new DateTime(2020, 01, 01),
-                        Price = 200,
-                        Series = new Series() {
-                            Name = "Sample series"
-                        }
-                    }
-                }
+                Name = "Sample classification"
             };
+            classificationsController = new ClassificationsController();
+        }
+
+        [TestMethod]
+        public void ValidNameValidationTest() {
+            var validationContext = new ValidationContext(classification, null, null);
+            var validationResults = new List<ValidationResult>();
+            bool isValid = Validator.TryValidateObject(classification, validationContext, validationResults, true);
+
+            Assert.IsTrue(isValid);
+        }
+
+        [TestMethod]
+        public void InvalidNameValidationTest() {
+            classification.Name = "sample classification";
+
+            var validationContext = new ValidationContext(classification, null, null);
+            var validationResults = new List<ValidationResult>();
+            bool isValid = Validator.TryValidateObject(classification, validationContext, validationResults, true);
+
+            Assert.IsFalse(isValid);
+        }
+
+        [TestMethod]
+        public void InvalidNameValidation2Test() {
+            classification.Name = "Sample classification $$";
+
+            var validationContext = new ValidationContext(classification, null, null);
+            var validationResults = new List<ValidationResult>();
+            bool isValid = Validator.TryValidateObject(classification, validationContext, validationResults, true);
+
+            Assert.IsFalse(isValid);
+        }
+
+        [TestMethod]
+        public void EmptyNameValidationTest() {
+            classification.Name = "";
+
+            var validationContext = new ValidationContext(classification, null, null);
+            var validationResults = new List<ValidationResult>();
+            bool isValid = Validator.TryValidateObject(classification, validationContext, validationResults, true);
+
+            Assert.IsFalse(isValid);
         }
 
         [TestCleanup]
         public void Cleanup() {
             classification = null;
+            classificationsController = null;
         }
     }
 }
