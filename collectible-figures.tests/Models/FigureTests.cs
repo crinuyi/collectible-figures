@@ -12,7 +12,6 @@ namespace collectible_figures.tests.Models {
     [TestClass]
     public class FigureTests {
         private Figure figure;
-        private FiguresController figuresController;
         private ValidationContext validationContext;
         private List<ValidationResult> validationResults;
 
@@ -24,7 +23,6 @@ namespace collectible_figures.tests.Models {
                 ReleaseDate = new DateTime(2020, 10, 01),
                 Price = 300
             };
-            figuresController = new FiguresController();
             validationContext = new ValidationContext(figure, null, null);
             validationResults = new List<ValidationResult>();
         }
@@ -87,7 +85,6 @@ namespace collectible_figures.tests.Models {
         [TestCleanup]
         public void Cleanup() {
             figure = null;
-            figuresController = null;
             validationContext = null;
             validationResults = null;
         }

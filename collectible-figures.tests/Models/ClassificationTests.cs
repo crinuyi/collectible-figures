@@ -10,7 +10,6 @@ namespace collectible_figures.tests.Models {
     [TestClass]
     public class ClassificationTests {
         private Classification classification;
-        private ClassificationsController classificationsController;
         private ValidationContext validationContext;
         private List<ValidationResult> validationResults;
 
@@ -19,7 +18,6 @@ namespace collectible_figures.tests.Models {
             classification = new Classification() {
                 Name = "Sample classification"
             };
-            classificationsController = new ClassificationsController();
             validationContext = new ValidationContext(classification, null, null);
             validationResults = new List<ValidationResult>();
         }
@@ -61,7 +59,6 @@ namespace collectible_figures.tests.Models {
         [TestCleanup]
         public void Cleanup() {
             classification = null;
-            classificationsController = null;
             validationContext = null;
             validationResults = null;
         }
