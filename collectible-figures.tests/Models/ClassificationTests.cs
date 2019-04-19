@@ -11,6 +11,8 @@ namespace collectible_figures.tests.Models {
     public class ClassificationTests {
         private Classification classification;
         private ClassificationsController classificationsController;
+        private ValidationContext validationContext;
+        private List<ValidationResult> validationResults;
 
         [TestInitialize]
         public void Init() {
@@ -18,12 +20,12 @@ namespace collectible_figures.tests.Models {
                 Name = "Sample classification"
             };
             classificationsController = new ClassificationsController();
+            validationContext = new ValidationContext(classification, null, null);
+            validationResults = new List<ValidationResult>();
         }
 
         [TestMethod]
-        public void ValidNameValidationTest() {
-            var validationContext = new ValidationContext(classification, null, null);
-            var validationResults = new List<ValidationResult>();
+        public void ClassificationTest() {
             bool isValid = Validator.TryValidateObject(classification, validationContext, validationResults, true);
 
             Assert.IsTrue(isValid);
@@ -32,9 +34,7 @@ namespace collectible_figures.tests.Models {
         [TestMethod]
         public void InvalidNameValidationTest() {
             classification.Name = "sample classification";
-
-            var validationContext = new ValidationContext(classification, null, null);
-            var validationResults = new List<ValidationResult>();
+            
             bool isValid = Validator.TryValidateObject(classification, validationContext, validationResults, true);
 
             Assert.IsFalse(isValid);
@@ -44,8 +44,6 @@ namespace collectible_figures.tests.Models {
         public void InvalidNameValidation2Test() {
             classification.Name = "Sample classification $$";
 
-            var validationContext = new ValidationContext(classification, null, null);
-            var validationResults = new List<ValidationResult>();
             bool isValid = Validator.TryValidateObject(classification, validationContext, validationResults, true);
 
             Assert.IsFalse(isValid);
@@ -54,9 +52,7 @@ namespace collectible_figures.tests.Models {
         [TestMethod]
         public void EmptyNameValidationTest() {
             classification.Name = "";
-
-            var validationContext = new ValidationContext(classification, null, null);
-            var validationResults = new List<ValidationResult>();
+            
             bool isValid = Validator.TryValidateObject(classification, validationContext, validationResults, true);
 
             Assert.IsFalse(isValid);
@@ -66,6 +62,8 @@ namespace collectible_figures.tests.Models {
         public void Cleanup() {
             classification = null;
             classificationsController = null;
+            validationContext = null;
+            validationResults = null;
         }
     }
 }
