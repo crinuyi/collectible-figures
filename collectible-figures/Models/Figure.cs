@@ -21,6 +21,7 @@ namespace collectible_figures.Models {
         [DataType(DataType.Text)]
         [RegularExpression("^1:[0-9]*$", ErrorMessage = "Skala musi zostać przedstawiona jako 1:[liczba].")]
         [DisplayName("Skala")]
+        [Required]
         public string Scale { get; set; }
 
         [DataType(DataType.Date)]
