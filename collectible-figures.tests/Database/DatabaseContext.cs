@@ -78,19 +78,19 @@ namespace collectible_figures.Database {
         Classification IDatabaseContext.FindClassificationById(int id) {
             if (ClassificationsDictionary.ContainsKey(id))
                 return ClassificationsDictionary[id];
-            else throw new KeyNotFoundException();
+            else return null;
         }
 
         Figure IDatabaseContext.FindFigureById(int id) {
             if (FiguresDictionary.ContainsKey(id))
                 return FiguresDictionary[id];
-            else throw new KeyNotFoundException();
+            else return null;
         }
 
         Series IDatabaseContext.FindSeriesById(int id) {
             if (SeriesDictionary.ContainsKey(id))
                 return SeriesDictionary[id];
-            else throw new KeyNotFoundException();
+            else return null;
         }
 
         int IDatabaseContext.SaveChanges() {
