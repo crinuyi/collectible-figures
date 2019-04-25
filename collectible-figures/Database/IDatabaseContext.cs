@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace collectible_figures.Database {
-    interface IDatabaseContext {
+    public interface IDatabaseContext {
         IQueryable<Figure> Figures { get; }
         IQueryable<Classification> Classifications { get; }
         IQueryable<Series> Series { get; }

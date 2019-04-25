@@ -6,34 +6,38 @@ using collectible_figures.Models;
 
 namespace collectible_figures.Database {
     public class DatabaseContext : IDatabaseContext {
-        Dictionary<int, Figure> Figures { get; set; }
-        Dictionary<int, Series> Series { get; set; }
-        Dictionary<int, Classification> Classifications { get; set; }
-        IQueryable<Figure> IDatabaseContext.Figures {
-            get { return Figures.Select(x => x.Value).AsQueryable<Figure>(); }
-        }
-        IQueryable<Classification> IDatabaseContext.Classifications {
-            get { return Classifications.Select(x => x.Value).AsQueryable<Classification>(); }
+        Dictionary<int, Figure> FiguresDictionary { get; set; }
+        Dictionary<int, Series> SeriesDictionary { get; set; }
+        Dictionary<int, Classification> ClassificationsDictionary { get; set; }
+
+        public DatabaseContext() { }
+
+        public IQueryable<Figure> Figures {
+            get { return FiguresDictionary.Select(x => x.Value).AsQueryable<Figure>(); }
         }
 
-        IQueryable<Series> IDatabaseContext.Series {
-            get { return Series.Select(x => x.Value).AsQueryable<Series>(); }
+        public IQueryable<Classification> Classifications {
+            get { return ClassificationsDictionary.Select(x => x.Value).AsQueryable<Classification>(); }
+        }
+
+        public IQueryable<Series> Series {
+            get { return SeriesDictionary.Select(x => x.Value).AsQueryable<Series>(); }
         }
 
         T IDatabaseContext.Add<T>(T entity) {
             if (entity is Figure) {
                 Figure figure = entity as Figure;
-                Figures.Add(figure.FigureID, figure);
+                FiguresDictionary.Add(figure.FigureID, figure);
                 return entity;
             }
             else if (entity is Classification) {
                 Classification classification = entity as Classification;
-                Classifications.Add(classification.ClassificationID, classification);
+                ClassificationsDictionary.Add(classification.ClassificationID, classification);
                 return entity;
             }
             else if (entity is Series) {
                 Series series = entity as Series;
-                Series.Add(series.SeriesID, series);
+                SeriesDictionary.Add(series.SeriesID, series);
                 return entity;
             }
             else throw new TypeLoadException();
@@ -42,24 +46,24 @@ namespace collectible_figures.Database {
         T IDatabaseContext.Delete<T>(T entity) {
             if (entity is Figure) {
                 Figure figure = entity as Figure;
-                if (Figures.ContainsKey(figure.FigureID)) {
-                    Figures.Remove(figure.FigureID);
+                if (FiguresDictionary.ContainsKey(figure.FigureID)) {
+                    FiguresDictionary.Remove(figure.FigureID);
                     return entity;
                 }
                 else throw new KeyNotFoundException();
             }
             else if (entity is Classification) {
                 Classification classification = entity as Classification;
-                if (Classifications.ContainsKey(classification.ClassificationID)) {
-                    Classifications.Remove(classification.ClassificationID);
+                if (ClassificationsDictionary.ContainsKey(classification.ClassificationID)) {
+                    ClassificationsDictionary.Remove(classification.ClassificationID);
                     return entity;
                 }
                 else throw new KeyNotFoundException();
             }
             else if (entity is Series) {
                 Series series = entity as Series;
-                if (Series.ContainsKey(series.SeriesID)) {
-                    Series.Remove(series.SeriesID);
+                if (SeriesDictionary.ContainsKey(series.SeriesID)) {
+                    SeriesDictionary.Remove(series.SeriesID);
                     return entity;
                 }
                 else throw new KeyNotFoundException();
@@ -68,20 +72,20 @@ namespace collectible_figures.Database {
         }
 
         Classification IDatabaseContext.FindClassificationById(int id) {
-            if (Classifications.ContainsKey(id))
-                return Classifications[id];
+            if (ClassificationsDictionary.ContainsKey(id))
+                return ClassificationsDictionary[id];
             else throw new KeyNotFoundException();
         }
 
         Figure IDatabaseContext.FindFigureById(int id) {
-            if (Figures.ContainsKey(id))
-                return Figures[id];
+            if (FiguresDictionary.ContainsKey(id))
+                return FiguresDictionary[id];
             else throw new KeyNotFoundException();
         }
 
         Series IDatabaseContext.FindSeriesById(int id) {
-            if (Series.ContainsKey(id))
-                return Series[id];
+            if (SeriesDictionary.ContainsKey(id))
+                return SeriesDictionary[id];
             else throw new KeyNotFoundException();
         }
 
