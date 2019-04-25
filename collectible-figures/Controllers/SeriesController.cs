@@ -13,7 +13,11 @@ namespace collectible_figures.Controllers
 {
     public class SeriesController : Controller
     {
-        private IDatabaseContext db;
+        private IDatabaseContext db = null;
+
+        public SeriesController(IDatabaseContext databaseContext) {
+            db = databaseContext;
+        }
 
         // GET: Series
         [Route("seria")]

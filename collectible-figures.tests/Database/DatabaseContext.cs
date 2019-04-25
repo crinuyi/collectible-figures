@@ -10,7 +10,11 @@ namespace collectible_figures.Database {
         Dictionary<int, Series> SeriesDictionary { get; set; }
         Dictionary<int, Classification> ClassificationsDictionary { get; set; }
 
-        public DatabaseContext() { }
+        public DatabaseContext() {
+            FiguresDictionary = new Dictionary<int, Figure>();
+            SeriesDictionary = new Dictionary<int, Series>();
+            ClassificationsDictionary = new Dictionary<int, Classification>();
+        }
 
         public IQueryable<Figure> Figures {
             get { return FiguresDictionary.Select(x => x.Value).AsQueryable<Figure>(); }

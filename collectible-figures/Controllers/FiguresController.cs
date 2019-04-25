@@ -13,7 +13,11 @@ namespace collectible_figures.Controllers
 {
     public class FiguresController : Controller
     {
-        private IDatabaseContext db;
+        private IDatabaseContext db = null;
+
+        public FiguresController(IDatabaseContext databaseContext) {
+            db = databaseContext;
+        }
 
         // GET: Figures
         [Route("figurka")]
