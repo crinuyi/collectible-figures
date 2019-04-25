@@ -6,13 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using collectible_figures.Database;
 using collectible_figures.Models;
 
 namespace collectible_figures.Controllers
 {
     public class SeriesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IDatabaseContext db;
 
         // GET: Series
         [Route("seria")]
@@ -29,7 +30,7 @@ namespace collectible_figures.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Series series = db.Series.Find(id);
+            Series series = db.FindSeriesById((int)id);
             if (series == null)
             {
                 return HttpNotFound();
@@ -55,43 +56,11 @@ namespace collectible_figures.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Series.Add(series);
+                db.Add(series);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(series);
-        }
-
-        // GET: Series/Edit/5
-        [Authorize(Roles = "Admin, Moderator")]
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Series series = db.Series.Find(id);
-            if (series == null)
-            {
-                return HttpNotFound();
-            }
-            return View(series);
-        }
-
-        // POST: Series/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SeriesID,Name")] Series series)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(series).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
             return View(series);
         }
 
@@ -103,7 +72,7 @@ namespace collectible_figures.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Series series = db.Series.Find(id);
+            Series series = db.FindSeriesById((int)id);
             if (series == null)
             {
                 return HttpNotFound();
@@ -116,19 +85,10 @@ namespace collectible_figures.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Series series = db.Series.Find(id);
-            db.Series.Remove(series);
+            Series series = db.FindSeriesById(id);
+            db.Delete(series);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

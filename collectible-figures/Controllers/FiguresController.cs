@@ -6,13 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using collectible_figures.Database;
 using collectible_figures.Models;
 
 namespace collectible_figures.Controllers
 {
     public class FiguresController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IDatabaseContext db;
 
         // GET: Figures
         [Route("figurka")]
@@ -30,7 +31,7 @@ namespace collectible_figures.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Figure figure = db.Figures.Find(id);
+            Figure figure = db.FindFigureById((int)id);
             if (figure == null)
             {
                 return HttpNotFound();
@@ -56,7 +57,7 @@ namespace collectible_figures.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Figures.Add(figure);
+                db.Add(figure);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,41 +67,6 @@ namespace collectible_figures.Controllers
             return View(figure);
         }
 
-        // GET: Figures/Edit/5
-        [Authorize(Roles = "Admin, Moderator")]
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Figure figure = db.Figures.Find(id);
-            if (figure == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ClassificationID = new SelectList(db.Classifications, "ClassificationID", "Name", figure.ClassificationID);
-            ViewBag.SeriesID = new SelectList(db.Series, "SeriesID", "Name", figure.SeriesID);
-            return View(figure);
-        }
-
-        // POST: Figures/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FigureID,Name,Scale,ReleaseDate,Price,ClassificationID,SeriesID")] Figure figure)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(figure).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ClassificationID = new SelectList(db.Classifications, "ClassificationID", "Name", figure.ClassificationID);
-            ViewBag.SeriesID = new SelectList(db.Series, "SeriesID", "Name", figure.SeriesID);
-            return View(figure);
-        }
 
         // GET: Figures/Delete/5
         [Authorize(Roles = "Admin, Moderator")]
@@ -110,7 +76,7 @@ namespace collectible_figures.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Figure figure = db.Figures.Find(id);
+            Figure figure = db.FindFigureById((int)id);
             if (figure == null)
             {
                 return HttpNotFound();
@@ -123,19 +89,10 @@ namespace collectible_figures.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Figure figure = db.Figures.Find(id);
-            db.Figures.Remove(figure);
+            Figure figure = db.FindFigureById(id);
+            db.Delete(figure);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

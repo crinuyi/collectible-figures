@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\DatabaseContext.cs" />
     <Compile Include="Models\ClassificationTests.cs" />
     <Compile Include="Models\FigureTests.cs" />
     <Compile Include="Models\SeriesTests.cs" />
@@ -86,6 +87,9 @@
       <Project>{E6FBFD3F-DD99-45F9-B28A-54FEB7ADE0EC}</Project>
       <Name>collectible-figures</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

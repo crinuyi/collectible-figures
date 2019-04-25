@@ -6,13 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using collectible_figures.Database;
 using collectible_figures.Models;
 
 namespace collectible_figures.Controllers
 {
     public class ClassificationsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();       
+        private IDatabaseContext db; 
 
         public JsonResult DoesNameExists(string name) {
             return Json(!db.Classifications.Any(x => x.Name == name), JsonRequestBehavior.AllowGet);
@@ -33,7 +34,7 @@ namespace collectible_figures.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Classification classification = db.Classifications.Find(id);
+            Classification classification = db.FindClassificationById((int)id);
             if (classification == null)
             {
                 return HttpNotFound();
@@ -57,45 +58,14 @@ namespace collectible_figures.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Classifications.Add(classification);
+                db.Add(classification);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(classification);
         }
-
-        // GET: Classifications/Edit/5
-        [Authorize(Roles = "Admin, Moderator")]
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Classification classification = db.Classifications.Find(id);
-            if (classification == null)
-            {
-                return HttpNotFound();
-            }
-            return View(classification);
-        }
-
-        // POST: Classifications/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ClassificationID,Name")] Classification classification)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(classification).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(classification);
-        }
+        
 
         // GET: Classifications/Delete/5
         [Authorize(Roles = "Admin, Moderator")]
@@ -105,7 +75,7 @@ namespace collectible_figures.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Classification classification = db.Classifications.Find(id);
+            Classification classification = db.FindClassificationById((int)id);
             if (classification == null)
             {
                 return HttpNotFound();
@@ -118,19 +88,10 @@ namespace collectible_figures.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Classification classification = db.Classifications.Find(id);
-            db.Classifications.Remove(classification);
+            Classification classification = db.FindClassificationById(id);
+            db.Delete(classification);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

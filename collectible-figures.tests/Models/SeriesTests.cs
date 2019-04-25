@@ -12,7 +12,6 @@ namespace collectible_figures.tests.Models {
     [TestClass]
     public class SeriesTests {
         private Series series;
-        private SeriesController seriesController;
         private ValidationContext validationContext;
         private List<ValidationResult> validationResults;
 
