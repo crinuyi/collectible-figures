@@ -199,7 +199,6 @@
     <Compile Include="Controllers\ClassificationsController.cs" />
     <Compile Include="Controllers\FiguresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IFiguresController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SeriesController.cs" />
