@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using collectible_figures.Database;
 using collectible_figures.Models;
 using collectible_figures.ViewModels;
 
@@ -11,7 +10,7 @@ namespace collectible_figures.Controllers
 {
     public class StatisticsController : Controller
     {
-        private IDatabaseContext db;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Statistics
         [Route("statystyki")]
