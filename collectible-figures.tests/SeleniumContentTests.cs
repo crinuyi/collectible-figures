@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace collectible_figures.tests {
     [TestClass]
-    public class MainPageTests {
+    public class SeleniumContentTests {
         private static string url = "http://localhost:50847/";
         private static ChromeDriver chromeDriver;
 
@@ -36,7 +37,7 @@ namespace collectible_figures.tests {
         }
 
         [TestMethod]
-        public void CheckTitle() {
+        public void CheckTitleOfMainPage() {
             Assert.AreEqual("Strona główna — Baza danych kolekcjonerskich figurek", chromeDriver.Title);
         }
 
@@ -68,6 +69,38 @@ namespace collectible_figures.tests {
                     result = false;
                     break;
                 }
+            }
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void CheckIfTextAppearedAfterTryingToLogin() {
+            IWebElement loginButton = chromeDriver.FindElementById("loginLink");
+            loginButton.Click();
+            IWebElement loginField = chromeDriver.FindElementById("UserName");
+            loginField.SendKeys("someUser");
+            IWebElement passwordField = chromeDriver.FindElementById("Password");
+            passwordField.SendKeys("somepassword");
+            passwordField.SendKeys(Keys.Enter);
+
+            String result = chromeDriver.FindElementByXPath("//*[@id=\"loginForm\"]/form/div[1]/ul/li").Text;
+
+            Assert.AreEqual("Nieprawidłowa próba logowania.", result);
+        }
+
+        [TestMethod]
+        [Obsolete]
+        public void CheckIfButtonIsClickable() {
+            IWebElement button = chromeDriver.FindElementByXPath("/html/body/div[2]/div/div[1]/div/button");
+            WebDriverWait wait = new WebDriverWait(chromeDriver, new TimeSpan(0, 0, 10));
+            bool result;
+
+            try {
+                wait.Until(ExpectedConditions.ElementToBeClickable(button));
+                result = true;
+            } catch (Exception e) {
+                result = false;
             }
 
             Assert.IsTrue(result);
