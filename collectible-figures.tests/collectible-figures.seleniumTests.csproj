@@ -77,8 +77,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SeleniumTests.cs" />
+    <Compile Include="SeleniumContentTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeleniumFormTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

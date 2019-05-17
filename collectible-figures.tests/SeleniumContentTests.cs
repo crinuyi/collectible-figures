@@ -13,27 +13,18 @@ namespace collectible_figures.tests {
     [TestClass]
     public class SeleniumContentTests {
         private static string url = "http://localhost:50847/";
-        private static ChromeDriver chromeDriver;
-
-        [AssemblyInitialize]
-        public static void AssemblyInitialize(TestContext testContext) {
-            chromeDriver = new ChromeDriver();
-        }
-
-        [AssemblyCleanup]
-        public static void AssemblyCleanup() {
-            chromeDriver.Close();
-            chromeDriver.Dispose();
-        }
+        private ChromeDriver chromeDriver;
 
         [TestInitialize]
         public void Initialize() {
+            chromeDriver = new ChromeDriver();
             chromeDriver.Navigate().GoToUrl(url);
         }
 
         [TestCleanup]
         public void Cleanup() {
-            
+            chromeDriver.Close();
+            chromeDriver = null;
         }
 
         [TestMethod]
